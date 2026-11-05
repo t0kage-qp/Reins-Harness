@@ -1,2 +1,1 @@
-def main() -> None:
-    print("Hello from reins-harness!")
+from reins_harness.chat import main

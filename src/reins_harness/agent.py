@@ -1,9 +1,13 @@
 import json
 import os
 from openai import OpenAI
+from dotenv import load_dotenv
+from pathlib import Path
 
 from reins_harness.tools import TOOLS, run_tool
 from reins_harness.history import trim_history
+
+load_dotenv(Path.home() / ".config" / "reins" / ".env")
 
 MAX_STEPS = 10
 

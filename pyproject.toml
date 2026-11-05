@@ -6,10 +6,12 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "openai>=3.45.0",
+    "python-dotenv>=1.2.4",
+    "textual>=8.2.8",
 ]
 
 [project.scripts]
-reins-harness = "reins_harness:main"
+reins = "reins_harness.chat:main"
 
 [build-system]
 requires = ["uv_build>=0.13.7,<0.14.0"]

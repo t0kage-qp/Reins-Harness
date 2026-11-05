@@ -1,6 +1,7 @@
 from pathlib import Path
 
 from reins_harness.agent import run_agent
+from reins_harness.prompts import SYSTEM_PROMPT
 
 def main() -> None:
     base = Path(__file__).parent

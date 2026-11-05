@@ -1,7 +1,13 @@
 import os
 from openai import OpenAI
+from pathlib import Path
 
-messages=[]
+BASE = Path(__file__).parent
+system_prompt = (BASE / "system_prompt.md").read_text(encoding="utf-8")
+
+messages=[
+    {"role": "system", "content": system_prompt}
+]
 
 client = OpenAI(
     base_url=os.environ["BASE_URL"],

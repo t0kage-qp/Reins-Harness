@@ -1,6 +1,8 @@
 import os
 from openai import OpenAI
 
+messages=[]
+
 client = OpenAI(
     base_url=os.environ["BASE_URL"],
     api_key=os.environ["API_KEY"],
@@ -8,9 +10,17 @@ client = OpenAI(
     default_headers={"User-Agent": "reins-harness/1.0"},
 )
 
-completion = client.chat.completions.create(
-    model=os.environ["MODEL_DEFAULT"],
-    messages=[{"role": "user", "content": "Hi what is your name?"}],
-)
+while True:
+    user_input = input("> ")
+    if user_input.strip() in ("exit","quit"):
+        break
+    messages.append({"role": "user", "content":user_input})
 
-print(completion.choices[0].message.content)
+    resp = client.chat.completions.create(
+        model=os.environ["MODEL_DEFAULT"],
+        messages=messages,
+    )
+    reply = resp.choices[0].message.content
+
+    messages.append({"role": "assistant","content":reply})
+    print(reply)

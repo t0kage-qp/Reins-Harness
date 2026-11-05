@@ -3,6 +3,7 @@ import os
 from openai import OpenAI
 
 from reins_harness.tools import TOOLS, run_tool
+from reins_harness.history import trim_history
 
 MAX_STEPS = 10
 
@@ -17,7 +18,7 @@ def run_agent(messages: list) -> str:
     for _ in range(MAX_STEPS):
         resp = client.chat.completions.create(
             model=os.environ["MODEL_DEFAULT"],
-            messages=messages,
+            messages=trim_history(messages),
             tools=TOOLS,
         )
         msg = resp.choices[0].message
